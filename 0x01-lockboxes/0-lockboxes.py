@@ -18,6 +18,6 @@ def canUnlockAll(boxes):
     unlockStatus = {x: True if not x else False for x in range(len(boxes))}
     for box in boxes:
         viableKeys = list(filter(lambda x: all([x > 0, x < len(boxes),
-                                                 x != boxes.index(box)]), box))
+                                                x != boxes.index(box)]), box))
         unlockStatus.update({x: True for x in viableKeys})
     return all(unlockStatus.values())
