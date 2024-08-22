@@ -3,6 +3,7 @@
 UTF8 validation module
 """
 
+
 def validUTF8(data):
     """
     Validates if data consists of
@@ -22,4 +23,3 @@ def validUTF8(data):
             return False
         num_bytes = max(num_bytes - 1, 0)
     return num_bytes == 0
-
