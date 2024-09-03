@@ -1,4 +1,4 @@
-#!/usr/local/bin/node
+#!/usr/bin/node
 
 function makeRequest (url) {
     const request = require('request');
