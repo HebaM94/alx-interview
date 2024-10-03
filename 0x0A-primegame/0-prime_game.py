@@ -14,25 +14,37 @@ def isWinner(x, nums):
     if x is None or nums is None or x == 0 or nums == []:
         return None
 
-    Maria = 0
     Ben = 0
+    Maria = 0
 
-    for i in range(x):
-        prime = []
-        sieve = [True] * (nums[i] + 1)
-        for p in range(2, nums[i] + 1):
-            if (sieve[p]):
-                prime.append(p)
-                for i in range(p, nums[i] + 1, p):
-                    sieve[i] = False
+    for round in range(x):
+        n = nums[round]
 
-        if len(prime) % 2 == 0:
+        if n == 1:
             Ben += 1
-        else:
+            continue
+
+        playing_numbers = [num for num in range(2, n + 1)]
+        index = 0
+
+        while (index < len(playing_numbers)):
+            current_prime = playing_numbers[index]
+            sieve_index = index + current_prime
+
+            while (sieve_index < len(playing_numbers)):
+                playing_numbers.pop(sieve_index)
+                sieve_index += current_prime
+
+            index += 1
+
+        prime_count = (len(playing_numbers))
+
+        if prime_count % 2 == 1:
             Maria += 1
-    
-    if Maria > Ben:
-        return 'Maria'
-    elif Ben > Maria:
-        return 'Ben'
-    return None
+        else:
+            Ben += 1
+
+    if Ben == Maria:
+        return None
+
+    return 'Ben' if Ben > Maria else 'Maria'
