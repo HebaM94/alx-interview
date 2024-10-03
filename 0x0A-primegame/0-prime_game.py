@@ -17,6 +17,15 @@ def isWinner(x, nums):
     Ben = 0
     Maria = 0
 
+    max_num = max(nums)
+    primes = [True] * (max_num + 1)
+    primes[0] = primes[1] = False
+
+    for i in range(2, int(max_num**0.5) + 1):
+        if primes[i]:
+            for j in range(i * i, max_num + 1, i):
+                primes[j] = False
+
     for round in range(x):
         n = nums[round]
 
@@ -24,22 +33,7 @@ def isWinner(x, nums):
             Ben += 1
             continue
 
-        playing_numbers = list(range(2, n + 1))
-        index = 0
-
-        while (index < len(playing_numbers)):
-            current_prime = playing_numbers[index]
-            sieve_index = index + 1
-
-            while (sieve_index < len(playing_numbers)):
-                if playing_numbers[sieve_index] % current_prime == 0:
-                    playing_numbers.pop(sieve_index)
-                else:
-                    sieve_index += 1
-
-            index += 1
-
-        prime_count = (len(playing_numbers))
+        prime_count = sum(primes[2:n+1])
 
         if prime_count % 2 == 1:
             Maria += 1
@@ -49,4 +43,4 @@ def isWinner(x, nums):
     if Ben == Maria:
         return None
 
-    return 'Ben' if Ben > Maria else 'Maria'
+    return 'Maria' if Maria > Ben else 'Ben'
