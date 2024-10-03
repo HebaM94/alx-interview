@@ -15,7 +15,13 @@ def isWinner(x, nums):
     Maria = 0
 
     for round in range(x):
-        playing_numbers = [num for num in range(2, nums[round] + 1)]
+        n = nums[round]
+
+        if n == 1:
+            Ben += 1
+            continue
+
+        playing_numbers = [num for num in range(2, n + 1)]
         index = 0
 
         while (index < len(playing_numbers)):
@@ -24,13 +30,13 @@ def isWinner(x, nums):
 
             while (sieve_index < len(playing_numbers)):
                 playing_numbers.pop(sieve_index)
-                sieve_index += current_prime - 1
+                sieve_index += current_prime
 
             index += 1
 
         prime_count = (len(playing_numbers))
 
-        if prime_count and prime_count % 2:
+        if prime_count % 2 == 1:
             Maria += 1
         else:
             Ben += 1
@@ -38,4 +44,4 @@ def isWinner(x, nums):
     if Ben == Maria:
         return None
 
-    return 'Ben' if Ben > Maria else 'Maria'
+    return 'Maria' if Maria > Ben else 'Ben'
