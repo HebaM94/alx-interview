@@ -11,32 +11,28 @@ def isWinner(x, nums):
 
         Retrurn: winner or None if the winner cannot be determined
     """
-    Ben = 0
-    Maria = 0
-
-    for round in range(x):
-        n = nums[round]
-
-        if n == 1:
-            Ben += 1
-            continue
-
-        primes = [True] * (n + 1)
-        primes[0] = primes[1] = False
-
-        for i in range(2, int(n**0.5) + 1):
-            if primes[i]:
-                for multiple in range(i * i, n + 1, i):
-                    primes[multiple] = False
-
-        prime_count = sum(primes)
-
-        if prime_count % 2 == 1:
-            Maria += 1
-        else:
-            Ben += 1
-
-    if Ben == Maria:
+    if x is None or nums is None or x == 0 or nums == []:
         return None
 
-    return 'Maria' if Maria > Ben else 'Ben'
+    Maria = 0
+    Ben = 0
+
+    for i in range(x):
+        prime = []
+        sieve = [True] * (nums[i] + 1)
+        for p in range(2, nums[i] + 1):
+            if (sieve[p]):
+                prime.append(p)
+                for i in range(p, nums[i] + 1, p):
+                    sieve[i] = False
+
+        if len(prime) % 2 == 0:
+            Ben += 1
+        else:
+            Maria += 1
+    
+    if Maria > Ben:
+        return 'Maria'
+    elif Ben > Maria:
+        return 'Ben'
+    return None
