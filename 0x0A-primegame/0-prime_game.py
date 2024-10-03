@@ -11,7 +11,7 @@ def isWinner(x, nums):
 
         Retrurn: winner or None if the winner cannot be determined
     """
-    if x is None or nums is None or x == 0 or nums == []:
+    if not x or not nums:
         return None
 
     Ben = 0
@@ -24,16 +24,18 @@ def isWinner(x, nums):
             Ben += 1
             continue
 
-        playing_numbers = [num for num in range(2, n + 1)]
+        playing_numbers = list(range(2, n + 1))
         index = 0
 
         while (index < len(playing_numbers)):
             current_prime = playing_numbers[index]
-            sieve_index = index + current_prime
+            sieve_index = index + 1
 
             while (sieve_index < len(playing_numbers)):
-                playing_numbers.pop(sieve_index)
-                sieve_index += current_prime
+                if playing_numbers[sieve_index] % current_prime == 0:
+                    playing_numbers.pop(sieve_index)
+                else:
+                    sieve_index += 1
 
             index += 1
 
