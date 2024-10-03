@@ -18,7 +18,7 @@ def isWinner(x, nums):
             current_prime = playing_numbers[index]
             sieve_index = index + current_prime
 
-            while(sieve_index < len(playing_numbers)):
+            while (sieve_index < len(playing_numbers)):
                 playing_numbers.pop(sieve_index)
                 sieve_index += current_prime - 1
 
