@@ -1,12 +1,15 @@
 #!/usr/bin/python3
 """Prime Game"""
 
-import random
-import sys
-
-
 def isWinner(x, nums):
-    """Determines the winner in the prime game"""
+    """Determines the winner in the prime game
+        
+        Args:
+            x (int): number of rounds
+            num (arr):  an array of n
+            
+        Retrurn: winner or None if the winner cannot be determined
+    """
     Ben = 0
     Maria = 0
 
