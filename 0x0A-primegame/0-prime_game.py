@@ -21,20 +21,15 @@ def isWinner(x, nums):
             Ben += 1
             continue
 
-        playing_numbers = [num for num in range(2, n + 1)]
-        index = 0
+        primes = [True] * (n + 1)
+        primes[0] = primes[1] = False
 
-        while (index < len(playing_numbers)):
-            current_prime = playing_numbers[index]
-            sieve_index = index + current_prime
+        for i in range(2, int(n**0.5) + 1):
+            if primes[i]:
+                for multiple in range(i * i, n + 1, i):
+                    primes[multiple] = False
 
-            while (sieve_index < len(playing_numbers)):
-                playing_numbers.pop(sieve_index)
-                sieve_index += current_prime
-
-            index += 1
-
-        prime_count = (len(playing_numbers))
+        prime_count = sum(primes)
 
         if prime_count % 2 == 1:
             Maria += 1
